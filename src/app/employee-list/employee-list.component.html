@@ -1,0 +1,5 @@
+<mat-list class="employee-list" cols="1" rowHeight="2:1">
+  <mat-list-item *ngFor="let emp of employees">
+    <app-employee [employee]="emp" (edit)="performEdit($event)" (delete)="performDelete($event)"></app-employee>
+  </mat-list-item>
+</mat-list>

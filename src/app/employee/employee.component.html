@@ -1,0 +1,43 @@
+<div class="employee">
+  <h3 matLine>
+      {{employee.id}} {{employee.lastName}}, {{employee.firstName}}
+  </h3>
+  <h2 mat-line>
+    Job Title: {{employee.position}}
+  </h2>
+  <p mat-line>
+      Direct reports: {{employee.numDirectReports}}
+  </p>
+  <p mat-line>
+      Total reports: {{employee.totalReports}}
+  </p>
+  <hr mat-line *ngIf="!!employee.directReports">
+  <mat-expansion-panel *ngIf="!!employee.directReports">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          Reports:
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>
+      <mat-list>
+          <mat-list-item *ngFor="let rep of reports">
+            <div class="reportrow">
+                <div class="reportcol">
+                    <b>{{rep.id}}</b> &nbsp;&nbsp;&nbsp;{{rep.firstName}} {{rep.lastName}}
+                </div>
+                <button (click)="editClick($event, rep, employee)" mat-mini-fab class="edit">
+                    <mat-icon>
+                      edit
+                    </mat-icon>
+                  </button>
+                <button (click)="deleteClick($event, rep, employee)" mat-mini-fab class="delete">
+                  <mat-icon>
+                    delete
+                  </mat-icon>
+                </button>
+            </div>
+          </mat-list-item>
+      </mat-list>  
+    </p>
+  </mat-expansion-panel>
+</div>
