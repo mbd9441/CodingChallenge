@@ -1,0 +1,42 @@
+<div *ngIf="mode=='Edit'; else Delete">
+  <h3>
+    Edit
+  </h3>
+  <form class="editEmployee">
+    <mat-form-field>
+      <input matInput placeholder="ID" value={{employee.id}} readonly=true disabled>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="First Name" value={{employee.firstName}} readonly=true disabled>
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Last Name" value={{employee.lastName}} readonly=true disabled>
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Position" value={{employee.position}} readonly=true disabled>
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Compensation" value={{employee.compensation}}>
+      </mat-form-field>
+    </form>
+</div>
+<ng-template #Delete>
+  <h3>
+    Delete
+  </h3>
+  <div *ngIf="!fromEmployee.id; else Completely">
+    <p >
+        Are you sure you want to completely remove <b>{{employee.firstName}} {{employee.lastName}}</b>?
+    </p>
+  </div>
+  <ng-template #Completely>
+    <div>
+      <p>
+          Are you sure you want to remove <b>{{employee.firstName}} {{employee.lastName}}</b> from under <b>{{fromEmployee.firstName}} {{fromEmployee.lastName}}</b>?
+      </p>
+    </div>
+  </ng-template> 
+</ng-template>
+<br>
+<button mat-button (click)="onCancelClick()">Cancel</button>
+<button mat-button [mat-dialog-close]="data.employee" cdkFocusInitial>Confirm</button>

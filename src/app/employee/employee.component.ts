@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter, } from '@angular/core';
 import {catchError, reduce} from 'rxjs/operators';
 
 import {Employee} from '../employee';
@@ -12,7 +12,7 @@ import {EmployeeService} from '../employee.service';
 
 export class EmployeeComponent {
   @Input() employee: Employee;
-  @Output() edit = new EventEmitter<Employee[]>();
+  @Output() edit = new EventEmitter<Employee>();
   @Output() delete = new EventEmitter<Employee[]>();
   errorMessage: string;
   private Compensation: number;
@@ -44,7 +44,7 @@ export class EmployeeComponent {
             }
           }
         }
-        console.log(this.reports);
+        console.log(this.reports);        
         this.employee["totalReports"]=this.reports.length;
       }
     );
@@ -92,12 +92,12 @@ export class EmployeeComponent {
     return Promise.resolve([reports, priorIter]);
   }**/
 
-  editClick(event:Event, thisEmp: Employee, fromEmp:Employee){
-    this.edit.emit([thisEmp,fromEmp]);
+  editClick(event:Event, emp: Employee){
+    this.edit.emit(emp);
   }
 
   deleteClick(event:Event, thisEmp: Employee, fromEmp:Employee){
-    this.edit.emit([thisEmp,fromEmp]);
+    this.delete.emit([thisEmp,fromEmp]);
   }
 
   private handleError(e: Error | any): string {

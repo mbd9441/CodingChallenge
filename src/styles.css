@@ -4,6 +4,7 @@
 body{
     margin: 0;
     background-color: #f2f2f2;
+    font-family: Roboto;
 }
 
 div.header{
@@ -13,7 +14,6 @@ div.header{
 }
 
 div.bannerwidth{
-    font-family: Roboto;
     font-size: 2.25em;
     font-weight: 500;
     color: white;
@@ -77,12 +77,12 @@ div.reportcol{
     margin: auto;
 }
 
-button.edit.mat-mini-fab.mat-accent{
+button.editRep.mat-mini-fab.mat-accent{
     margin: 3px;
     background-color: #0066ba;
 }
 
-button.delete.mat-mini-fab.mat-accent{
+button.deleteRep.mat-mini-fab.mat-accent{
     margin: 3px;
     background-color: #0066ba;
 }

@@ -3,6 +3,8 @@ import {catchError, map, reduce} from 'rxjs/operators';
 
 import {Employee} from '../employee';
 import {EmployeeService} from '../employee.service';
+import { MatDialog } from '@angular/material';
+import {EmployeeModalComponent} from '../employee-modal/employee-modal.component'
 
 @Component({
   selector: 'app-employee-list',
@@ -13,7 +15,7 @@ export class EmployeeListComponent implements OnInit {
   private employees: Employee[] = [];
   errorMessage: string;
   editEmployee: Employee[];
-  constructor(private employeeService: EmployeeService) {
+  constructor(private employeeService: EmployeeService, public EmployeeModal:MatDialog) {
   }
 
   ngOnInit(): void {
@@ -25,12 +27,29 @@ export class EmployeeListComponent implements OnInit {
       ).subscribe();
   }
 
-  performEdit(editEmp: Employee[]){
-    console.log(editEmp[0].id + " from " + editEmp[1].id);
+  performEdit(editEmp: Employee){
+    console.log("edit: " + editEmp.id);
+    this.openDialog([editEmp]);
   }
 
   performDelete(deleteEmp: Employee[]){
-    console.log(deleteEmp[0].id + " from " + deleteEmp[1].id);
+    console.log("delete " + deleteEmp[0].id + " from " + deleteEmp[1].id);
+    this.openDialog(deleteEmp);
+  }
+
+  openDialog(employee: Employee[]): void {
+    const employeeModal = this.EmployeeModal.open(EmployeeModalComponent, {
+      width: '250px',
+      data: employee
+    });
+
+    employeeModal.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.editEmployee = result;
+      if (!!result){
+        console.log(result);
+      }
+    });
   }
 
   private handleError(e: Error | any): string {

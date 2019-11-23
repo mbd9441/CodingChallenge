@@ -1,6 +1,20 @@
 <div class="employee">
   <h3 matLine>
-      {{employee.id}} {{employee.lastName}}, {{employee.firstName}}
+    <div class="reportrow">
+      <div class="reportcol">
+          {{employee.id}} {{employee.lastName}}, {{employee.firstName}}
+      </div>
+      <button (click)="editClick($event, employee)" mat-icon-button>
+        <mat-icon>
+          edit
+        </mat-icon>
+      </button>
+      <button (click)="deleteClick($event, employee, {})" mat-icon-button>
+        <mat-icon>
+          delete
+        </mat-icon>
+      </button>
+    </div>
   </h3>
   <h2 mat-line>
     Job Title: {{employee.position}}
@@ -25,12 +39,12 @@
                 <div class="reportcol">
                     <b>{{rep.id}} &nbsp;&nbsp;&nbsp;{{rep.firstName}} {{rep.lastName}} </b>
                 </div>
-                <button   (click)="editClick($event, rep, employee)" mat-mini-fab class="edit">
+                <button   (click)="editClick($event, rep)" mat-mini-fab class="editRep">
                   <mat-icon>
                     edit
                   </mat-icon>
                 </button>
-                <button (click)="deleteClick($event, rep, employee)" mat-mini-fab class="delete">
+                <button (click)="deleteClick($event, rep, employee)" mat-mini-fab class="deleteRep">
                   <mat-icon>
                     delete
                   </mat-icon>
