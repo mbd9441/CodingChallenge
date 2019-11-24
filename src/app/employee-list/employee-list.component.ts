@@ -6,6 +6,7 @@ import {EmployeeService} from '../employee.service';
 import { MatDialog } from '@angular/material';
 import {EmployeeModalComponent} from '../employee-modal/employee-modal.component'
 
+
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
@@ -34,6 +35,11 @@ export class EmployeeListComponent implements OnInit {
 
   performDelete(deleteEmp: Employee[]){
     console.log("delete " + deleteEmp[0].id + " from " + deleteEmp[1].id);
+    if(!!deleteEmp[1].id){
+      console.log("sorta bye bye")
+    } else {
+      console.log("uh oh! bye bye");
+    }
     this.openDialog(deleteEmp);
   }
 

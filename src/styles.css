@@ -1,15 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 /* You can add global styles to this file, and also import other style files */
-/*gray: #928c88*/
+
+
+:root{
+    --page-width-desktop: 50%;
+    --off-white: #f2f2f2;
+    --mindex-gray: #928c88;
+    --mindex-blue: #0066ba;
+    --mindex-dark-blue: #003764;
+    --mindex-really-dark-blue: #00233f;
+}
+
 body{
     margin: 0;
-    background-color: #f2f2f2;
+    background-color: var(--off-white);
     font-family: Roboto;
 }
 
 div.header{
     height:100%;
-    background-color: #0066ba;
+    background-color: var(--mindex-blue);
     margin-bottom: 25px;
 }
 
@@ -17,7 +27,7 @@ div.bannerwidth{
     font-size: 2.25em;
     font-weight: 500;
     color: white;
-    width: 75%;
+    width: var(--page-width-desktop);
     margin: auto;
     overflow: hidden;
     white-space: nowrap ;
@@ -25,7 +35,7 @@ div.bannerwidth{
 }
 
 mat-list.employee-list.mat-list{
-    width: 75%;
+    width: var(--page-width-desktop);
     margin: auto;
 }
 
@@ -79,12 +89,12 @@ div.reportcol{
 
 button.editRep.mat-mini-fab.mat-accent{
     margin: 3px;
-    background-color: #0066ba;
+    background-color: var(--mindex-blue);
 }
 
 button.deleteRep.mat-mini-fab.mat-accent{
     margin: 3px;
-    background-color: #0066ba;
+    background-color: var(--mindex-blue);
 }
 
 
