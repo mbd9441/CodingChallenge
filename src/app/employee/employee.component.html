@@ -25,38 +25,40 @@
   <p mat-line>
       Total reports: {{employee.totalReports}}
   </p>
-  <!--><hr mat-line *ngIf="!!employee.directReports">-->
   <mat-expansion-panel *ngIf="!!employee.directReports">
     <mat-expansion-panel-header>
       <mat-panel-title>
-          Reports:
+        Reports:
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <p>
-      <mat-list>
-          <mat-list-item *ngFor="let rep of reports">
-            <div *ngIf="employee.directReports.includes(rep.id); else notDirect" class="reportrow">
-                <div class="reportcol">
-                    <b>{{rep.id}} &nbsp;&nbsp;&nbsp;{{rep.firstName}} {{rep.lastName}} </b>
-                </div>
-                <button   (click)="editClick($event, rep)" mat-mini-fab class="editRep">
-                  <mat-icon>
-                    edit
-                  </mat-icon>
-                </button>
-                <button (click)="deleteClick($event, rep, employee)" mat-mini-fab class="deleteRep">
-                  <mat-icon>
-                    delete
-                  </mat-icon>
-                </button>
+      <mat-list class="replist">
+        <mat-list-item *ngFor="let rep of reports">
+          <div *ngIf="employee.directReports.includes(rep.id); else notDirect" class="reportrow">
+            <div class="reportcol">
+                <b>{{rep.id}} &nbsp;&nbsp;&nbsp;{{rep.firstName}} {{rep.lastName}} </b>
             </div>
-            <ng-template #notDirect>
-              <div>
-                &nbsp;&nbsp;&nbsp; {{rep.id}} &nbsp;&nbsp;&nbsp;{{rep.firstName}} {{rep.lastName}} 
-              </div>
-            </ng-template>
-          </mat-list-item>
-      </mat-list>  
-    </p>
+            <button   (click)="editClick($event, rep)" mat-mini-fab class="editRep">
+              <mat-icon>
+                edit
+              </mat-icon>
+            </button>
+            <button (click)="deleteClick($event, rep, employee)" mat-mini-fab class="deleteRep">
+              <mat-icon>
+                delete
+              </mat-icon>
+            </button>
+          </div>
+          <ng-template #notDirect>
+            <div>
+              &nbsp;&nbsp;&nbsp; {{rep.id}} &nbsp;&nbsp;&nbsp;{{rep.firstName}} {{rep.lastName}} 
+            </div>
+          </ng-template>
+        </mat-list-item>
+      </mat-list>
+      <div class="reportfooter">
+        <button (click)="addClick($event, employee);$event.stopPropagation();" mat-flat-button>
+          Add Report
+        </button>
+      </div>
   </mat-expansion-panel>
 </div>

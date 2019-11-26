@@ -14,6 +14,7 @@ export class EmployeeComponent {
   @Input() employee: Employee;
   @Output() edit = new EventEmitter<Employee>();
   @Output() delete = new EventEmitter<Employee[]>();
+  @Output() add = new EventEmitter<Employee>();
   errorMessage: string;
   private Compensation: number;
   private reports: Employee[]=[];
@@ -98,6 +99,10 @@ export class EmployeeComponent {
 
   deleteClick(event:Event, thisEmp: Employee, fromEmp:Employee){
     this.delete.emit([thisEmp,fromEmp]);
+  }
+
+  addClick(event:Event, parentEmp: Employee){
+    this.add.emit(parentEmp);
   }
 
   private handleError(e: Error | any): string {

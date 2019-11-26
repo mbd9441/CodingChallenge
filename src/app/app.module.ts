@@ -11,7 +11,7 @@ import {BackendlessMockService} from './backendless-mock.service';
 import {EmployeeComponent} from './employee/employee.component';
 import {EmployeeListComponent} from './employee-list/employee-list.component';
 import {EmployeeService} from './employee.service';
-import { EmployeeModalComponent } from './employee-modal/employee-modal.component';
+import { EmployeeModalComponent } from './employee-details-modal/employee-details-modal.component';
 
 @NgModule({
   declarations: [

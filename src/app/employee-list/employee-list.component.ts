@@ -4,7 +4,7 @@ import {catchError, map, reduce} from 'rxjs/operators';
 import {Employee} from '../employee';
 import {EmployeeService} from '../employee.service';
 import { MatDialog } from '@angular/material';
-import {EmployeeModalComponent} from '../employee-modal/employee-modal.component'
+import {EmployeeModalComponent} from '../employee-details-modal/employee-details-modal.component'
 
 
 @Component({
