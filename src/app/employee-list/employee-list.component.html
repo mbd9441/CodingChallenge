@@ -1,6 +1,6 @@
 <mat-list class="employee-list" cols="1" rowHeight="2:1" *ngIf="!!employees">
   <mat-list-item class = "employee" *ngFor="let emp of employees async">
-    <app-employee [employee]="emp" (add)="performAdd($event)" (edit)="performEdit($event)" (remove)="performRemove($event)"></app-employee>
+    <app-employee [employee]="emp" (addreport)="performAddReport($event)" (edit)="performEdit($event)" (remove)="performRemove($event)"></app-employee>
   </mat-list-item>
 </mat-list>
 

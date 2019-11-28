@@ -1,3 +1,11 @@
-<p>
-  employee-report-add-modal works!
-</p>
+<mat-form-field>
+  <mat-label>Select new report</mat-label>
+  <mat-select [(ngModel)]="selectedEmployee" name="sEmployee">
+    <mat-option *ngFor="let emps of potentialEmps" 
+    [value]="emps">
+    {{emps.firstName}} {{emps.lastName}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<button mat-button (click)="onCancelClick()" cdkFocusInitial>Cancel</button>
+<button mat-button (click)="onConfirmClick()" >Confirm</button>

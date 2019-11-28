@@ -3,7 +3,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCardModule, MatGridListModule, MatIconModule, MatInputModule, MatMenuModule, MatListModule, MatExpansionModule, MatDialogModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatGridListModule, MatIconModule, MatInputModule, MatMenuModule, MatListModule, MatExpansionModule, MatDialogModule, MatSelectModule} from '@angular/material';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 
 import {AppComponent} from './app.component';
@@ -45,10 +45,11 @@ import { EmployeeReportAddModalComponent } from './employee-report-add-modal/emp
     MatListModule,
     MatButtonModule,
     MatExpansionModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule
   ],
   providers: [EmployeeService],
-  entryComponents: [EmployeeDetailsModalComponent, EmployeeRemoveModalComponent],
+  entryComponents: [EmployeeDetailsModalComponent, EmployeeRemoveModalComponent, EmployeeReportAddModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

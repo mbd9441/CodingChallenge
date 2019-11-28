@@ -14,7 +14,7 @@ export class EmployeeComponent {
   @Input() employee: Employee;
   @Output() edit = new EventEmitter<Employee>();
   @Output() remove = new EventEmitter<Employee[]>();
-  @Output() add = new EventEmitter<Employee[]>();
+  @Output() addreport = new EventEmitter<Employee>();
   errorMessage: string;
   private employees: any = [];
   private reports: Employee[]=[];
@@ -68,8 +68,8 @@ export class EmployeeComponent {
     }
   }
 
-  addClick(event:Event, thisEmp: Employee, parentEmp:Employee){
-    this.add.emit([thisEmp, parentEmp]);
+  addReportClick(event:Event, parentEmp:Employee){
+    this.addreport.emit(parentEmp);
   }
 
   editClick(event:Event, thisEmp: Employee){

@@ -1,11 +1,12 @@
-import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {catchError, map, reduce} from 'rxjs/operators';
 
 import {Employee, create} from '../employee';
 import {EmployeeService} from '../employee.service';
 import { MatDialog } from '@angular/material';
-import {EmployeeDetailsModalComponent} from '../employee-details-modal/employee-details-modal.component'
+import {EmployeeDetailsModalComponent} from '../employee-details-modal/employee-details-modal.component';
 import {EmployeeRemoveModalComponent} from '../employee-remove-modal/employee-remove-modal.component';
+import {EmployeeReportAddModalComponent} from '../employee-report-add-modal/employee-report-add-modal.component';
 
 @Component({
   selector: 'app-employee-list',
@@ -17,7 +18,8 @@ export class EmployeeListComponent implements OnInit {
   errorMessage: string;
   editEmployee: Employee;
   removeEmployee: Employee[];
-  constructor(private employeeService: EmployeeService, public EmployeeDetailsModal:MatDialog, public EmployeeRemoveModal:MatDialog, private changeDetectorRefs: ChangeDetectorRef) {
+  constructor(private employeeService: EmployeeService, public EmployeeDetailsModal:MatDialog, 
+    public EmployeeRemoveModal:MatDialog, public EmployeeReportAddModal: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -112,9 +114,28 @@ export class EmployeeListComponent implements OnInit {
     });
   }
 
-  performAdd(addEmp: Employee[]){
-    var newEmp: Employee = create();
-    this.openEditDialog(newEmp);
+  performAddReport(parentEmp: Employee){
+    console.log(parentEmp)
+    this.openAddReportDialog(parentEmp);
+  }
+
+  openAddReportDialog(parentEmp: Employee): void {
+    console.log(parentEmp)
+    const EmployeeReportAddModal = this.EmployeeReportAddModal.open(EmployeeReportAddModalComponent, {
+      width: '250px',
+      data: [parentEmp, this.employees]
+    });
+
+    EmployeeReportAddModal.afterClosed().subscribe(result => {
+      if (!!result){
+        console.log(result)
+        this.employeeService.save(result).subscribe(
+          result=>{
+            this.loadEmployees();
+          }
+        )
+      }
+    });
   }
 
   private handleError(e: Error | any): string {

@@ -42,11 +42,6 @@ mat-list.employee-list.mat-list{
     padding-top: 0px !important;
 }
 
-mat-list-item.employee.mat-list-item.ng-star-inserted{
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-
 mat-list.mat-list{
     padding-top: 0px !important;
 }
@@ -63,11 +58,16 @@ mat-list-item.mat-list-item{
     height:0% !important;
 }
 
+mat-list-item.employee.mat-list-item{
+    padding: 15px 0px 15px 0px;
+}
+
 app-employee{
     width: 100%;
     border-radius: 2px;
     background-color: white;
     box-shadow: 0px 4px 4px lightgray;
+    
 }
 
 h3.mat-line{
