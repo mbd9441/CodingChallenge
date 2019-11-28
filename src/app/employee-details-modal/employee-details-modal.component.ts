@@ -22,14 +22,12 @@ export class EmployeeDetailsModalComponent implements OnInit {
         if(!this.employee.compensation){
           this.employee["compensation"]=null;
         }
-        console.log("Edit " + this.employee);
       }
     }
   
   checkFields(): void {
     var canClose=true;
     for (var field in this.employee){
-      console.log(this.employee[field]);
       if (!this.employee[field]){
         canClose=false;
       } else if (this.employee.compensation){

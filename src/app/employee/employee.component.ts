@@ -37,11 +37,9 @@ export class EmployeeComponent {
           if (curemp.id == curempid){
             if (!!curemp.directReports){
               if (curemp.directReports.length>0){
-                console.log("fuck")
                 this.employee["numDirectReports"] = emps[emp].directReports.length;
                 this.recurEmps(curemp);
               } else {
-                console.log("ass")
                 this.employee["numDirectReports"] = 0;
               }
             } else {
@@ -91,23 +89,18 @@ export class EmployeeComponent {
   /**async getAllReports(curempid: number, origempid: number, reports: Employee[], priorIter: number[]): Promise<[Employee[], number[]]>{
     var currentEmployee: Employee;
     priorIter.push(curempid);
-    console.log('been here '+curempid)
     this.employeeService.get(curempid).subscribe(
       (emp)=>{
         currentEmployee = emp;
         if (!!currentEmployee.directReports){
-          console.log('direct reports ' + currentEmployee.id + ' ' + currentEmployee.directReports);
           for (var emps in currentEmployee.directReports){
-            console.log('current report: ' + currentEmployee.directReports[emps]);
-            if (!priorIter.includes(currentEmployee.directReports[emps])){
+             if (!priorIter.includes(currentEmployee.directReports[emps])){
               let promise = this.getAllReports(currentEmployee.directReports[emps],origempid, reports, priorIter);
               var resultArray = promise.then(result=>resultArray=result);
               reports = resultArray[0];
               priorIter = resultArray[1];
-              console.log('is ' + curempid + ' ' + origempid);
               if (curempid!=origempid){
                 reports.push(currentEmployee);
-                console.log(JSON.stringify(reports)');
               }
             }
           }

@@ -17,7 +17,6 @@ export class EmployeeRemoveModalComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EmployeeRemoveModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      console.log(data)
       if (!!data){
         this.employee=data.employees[0];
         if (!!data.employees[1]){

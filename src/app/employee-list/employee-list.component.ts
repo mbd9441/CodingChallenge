@@ -25,7 +25,6 @@ export class EmployeeListComponent implements OnInit {
   }
 
   loadEmployees(): void {
-    console.log("load")
     this.employeeService.getAll()
       .pipe(
         reduce((emps, e: Employee) => emps.concat(e), []),
@@ -35,7 +34,6 @@ export class EmployeeListComponent implements OnInit {
   }
 
   performRemove(removeEmp: Employee[]){
-    console.log("Remove " + removeEmp[0].id + " from " + removeEmp[1]);
     this.openRemoveDialog(removeEmp);
   }
 
@@ -47,32 +45,26 @@ export class EmployeeListComponent implements OnInit {
 
     EmployeeRemoveModal.afterClosed().subscribe(result => {
       this.removeEmployee=result;
-      console.log("ass")
-      console.log(result)
       if (!!this.removeEmployee){
         if (!!this.removeEmployee[1]){
-          console.log("remove report " +  this.removeEmployee[0] +"from " + this.removeEmployee[1]);
-          this.removeReport(this.removeEmployee[0], this.removeEmployee[1])
+           this.removeReport(this.removeEmployee[0], this.removeEmployee[1]);
         } else {
           this.removeReportsAll(this.removeEmployee[0]);
+          this.employeeService.remove(this.removeEmployee[0]).subscribe(
+            result=>{
+              this.loadEmployees();
+            }
+          );
         }
-        this.employeeService.remove(this.removeEmployee[0]).subscribe(
-          result=>{
-            this.loadEmployees();
-          }
-        );
       }
     });
   }
 
   removeReportsAll(emp:Employee){
     for(var i=0; i<this.employees.length; i++){
-      console.log(this.employees[i])
       if (!!this.employees[i].directReports){
         for(var j=0; j<this.employees[i].directReports.length; j++){
-          console.log(this.employees[i].directReports[j]);
           if(this.employees[i].directReports[j]==emp.id){
-            console.log("remove " + emp.id + " from " + this.employees[i].id)
             this.employees[i].directReports.splice(j,1);
             this.employeeService.save(this.employees[i]).subscribe(
               result=>{}
@@ -86,12 +78,12 @@ export class EmployeeListComponent implements OnInit {
 
   removeReport(emp:Employee, fromEmp: Employee){
     for(var i=0; i<fromEmp.directReports.length; i++){
-      console.log(fromEmp.directReports[i]);
       if(fromEmp.directReports[i]==emp.id){
-        console.log("remove " + emp.id + " from " + fromEmp.id)
         fromEmp.directReports.splice(i,1);
         this.employeeService.save(fromEmp).subscribe(
-          result=>{}
+          result=>{
+            this.loadEmployees();
+          }
         )
         break
       }
@@ -99,7 +91,6 @@ export class EmployeeListComponent implements OnInit {
   }
 
   performEdit(editEmp: Employee){
-    console.log("edit: " + editEmp.id);
     this.openEditDialog(editEmp);
   }
 
@@ -112,7 +103,6 @@ export class EmployeeListComponent implements OnInit {
     EmployeeDetailsModal.afterClosed().subscribe(result => {
       this.editEmployee = result;
       if (!!result){
-        console.log("edit" + employee + this.editEmployee);
         this.employeeService.save(result).subscribe(
           result=>{
             this.loadEmployees();
@@ -124,13 +114,6 @@ export class EmployeeListComponent implements OnInit {
 
   performAdd(addEmp: Employee[]){
     var newEmp: Employee = create();
-    if (!!addEmp){
-      if (addEmp[1]){
-        console.log("add report to: " + addEmp[1].id);
-      }
-    }else{
-      console.log("add employee");
-    }
     this.openEditDialog(newEmp);
   }
 
