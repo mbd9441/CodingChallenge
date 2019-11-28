@@ -36,8 +36,14 @@ export class EmployeeComponent {
           var curemp=emps[emp];
           if (curemp.id == curempid){
             if (!!curemp.directReports){
-              this.employee["numDirectReports"] = emps[emp].directReports.length;
-              this.recurEmps(curemp);
+              if (curemp.directReports.length>0){
+                console.log("fuck")
+                this.employee["numDirectReports"] = emps[emp].directReports.length;
+                this.recurEmps(curemp);
+              } else {
+                console.log("ass")
+                this.employee["numDirectReports"] = 0;
+              }
             } else {
               this.employee["numDirectReports"] = 0;
             }

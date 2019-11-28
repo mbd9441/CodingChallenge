@@ -28,7 +28,7 @@
   <p mat-line>
       Total reports: {{employee.totalReports}}
   </p>
-  <mat-expansion-panel *ngIf="!!employee.directReports; else noReports">
+  <mat-expansion-panel *ngIf="employee.totalReports>0; else noReports">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Reports:

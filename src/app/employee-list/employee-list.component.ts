@@ -49,17 +49,18 @@ export class EmployeeListComponent implements OnInit {
       this.removeEmployee=result;
       console.log("ass")
       console.log(result)
-      if (!!result){
-        if (!!result[1]){
-          console.log("remove report " +  result[0] +"from " + result[1]);
+      if (!!this.removeEmployee){
+        if (!!this.removeEmployee[1]){
+          console.log("remove report " +  this.removeEmployee[0] +"from " + this.removeEmployee[1]);
+          this.removeReport(this.removeEmployee[0], this.removeEmployee[1])
         } else {
           this.removeReportsAll(this.removeEmployee[0]);
-          this.employeeService.remove(this.removeEmployee[0]).subscribe(
-            result=>{
-              this.loadEmployees();
-            }
-          );
         }
+        this.employeeService.remove(this.removeEmployee[0]).subscribe(
+          result=>{
+            this.loadEmployees();
+          }
+        );
       }
     });
   }
@@ -71,13 +72,28 @@ export class EmployeeListComponent implements OnInit {
         for(var j=0; j<this.employees[i].directReports.length; j++){
           console.log(this.employees[i].directReports[j]);
           if(this.employees[i].directReports[j]==emp.id){
-            console.log("remove " + emp.id + " from " + this.employees[i])
+            console.log("remove " + emp.id + " from " + this.employees[i].id)
             this.employees[i].directReports.splice(j,1);
             this.employeeService.save(this.employees[i]).subscribe(
               result=>{}
             )
+            break
           }
         }
+      }
+    }
+  }
+
+  removeReport(emp:Employee, fromEmp: Employee){
+    for(var i=0; i<fromEmp.directReports.length; i++){
+      console.log(fromEmp.directReports[i]);
+      if(fromEmp.directReports[i]==emp.id){
+        console.log("remove " + emp.id + " from " + fromEmp.id)
+        fromEmp.directReports.splice(i,1);
+        this.employeeService.save(fromEmp).subscribe(
+          result=>{}
+        )
+        break
       }
     }
   }
