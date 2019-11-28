@@ -25,7 +25,7 @@
   <p mat-line>
       Total reports: {{employee.totalReports}}
   </p>
-  <mat-expansion-panel *ngIf="!!employee.directReports">
+  <mat-expansion-panel *ngIf="!!employee.directReports; else noReports">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Reports:
@@ -61,4 +61,16 @@
         </button>
       </div>
   </mat-expansion-panel>
+  <ng-template #noReports>
+    <div class="no-report-header">
+      <div class="no-report-header-body">
+        <p class="no-report-header-text">
+            Reports
+        </p>
+        <button (click)="addClick($event, rep, employee);" mat-flat-button>
+            Add Report
+        </button>
+      </div>
+    </div>
+  </ng-template>
 </div>
