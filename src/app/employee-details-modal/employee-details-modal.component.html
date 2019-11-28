@@ -1,42 +1,55 @@
-<div *ngIf="mode=='Edit'; else Delete">
-  <h3>
+<div>
+  <h3 *ngIf="!!employee.id; else add">
     Edit
   </h3>
+  <ng-template #add>
+    <h3>
+      Add
+    </h3>
+  </ng-template>
   <form class="editEmployee">
-    <mat-form-field>
-      <input matInput placeholder="ID" value={{employee.id}} readonly=true disabled>
+    <mat-form-field *ngIf="!!employee.id; else noId">
+      <input matInput placeholder="ID" [(ngModel)]="employee.id" name="id" readonly=true disabled>
     </mat-form-field>
-    <mat-form-field>
-        <input matInput placeholder="First Name" value={{employee.firstName}} readonly=true disabled>
-      </mat-form-field>
+    <ng-template #noId>
       <mat-form-field>
-          <input matInput placeholder="Last Name" value={{employee.lastName}} readonly=true disabled>
+        <input matInput placeholder="ID" [(ngModel)]="employee.id" name="id" cdkFocusInitial required>
       </mat-form-field>
+    </ng-template>
+    <mat-form-field *ngIf="!!employee.firstName; else noFirstName">
+      <input matInput placeholder="First Name" [(ngModel)]="employee.firstName" name="firstName" readonly=true disabled>
+    </mat-form-field>
+    <ng-template #noFirstName>
       <mat-form-field>
-          <input matInput placeholder="Position" value={{employee.position}} readonly=true disabled>
+        <input matInput placeholder="First Name" [(ngModel)]="employee.firstName" name="firstName" required>
       </mat-form-field>
+    </ng-template>
+    <mat-form-field *ngIf="!!employee.lastName; else noLastName">
+      <input matInput placeholder="Last Name" [(ngModel)]="employee.lastName" name="lastName" readonly=true disabled>
+    </mat-form-field>
+    <ng-template #noLastName>
       <mat-form-field>
-          <input matInput placeholder="Compensation" value={{employee.compensation}}>
+        <input matInput placeholder="Last Name" [(ngModel)]="employee.lastName" name="lastName" required>
       </mat-form-field>
-    </form>
+    </ng-template>
+    <mat-form-field *ngIf="!!employee.position; else noPosition">
+        <input matInput placeholder="Position" [(ngModel)]="employee.position" name="position" readonly=true disabled>
+    </mat-form-field>
+    <ng-template #noPosition>
+      <mat-form-field>
+          <input matInput placeholder="Position" [(ngModel)]="employee.position" name="position" required>
+      </mat-form-field>
+    </ng-template>
+    <mat-form-field *ngIf="!!employee.id && !employee.compensation; else noCompensation">
+        <input matInput placeholder="Compensation" [(ngModel)]="employee.compensation" name="compensation" cdkFocusInitial required>
+    </mat-form-field>
+    <ng-template #noCompensation>
+      <mat-form-field>
+          <input matInput placeholder="Compensation" [(ngModel)]="employee.compensation" name="compensation" required>
+      </mat-form-field>
+    </ng-template>
+  </form>
 </div>
-<ng-template #Delete>
-  <h3>
-    Delete
-  </h3>
-  <div *ngIf="!fromEmployee.id; else Completely">
-    <p >
-        Are you sure you want to completely remove <b>{{employee.firstName}} {{employee.lastName}}</b>?
-    </p>
-  </div>
-  <ng-template #Completely>
-    <div>
-      <p>
-          Are you sure you want to remove <b>{{employee.firstName}} {{employee.lastName}}</b> from under <b>{{fromEmployee.firstName}} {{fromEmployee.lastName}}</b>?
-      </p>
-    </div>
-  </ng-template> 
-</ng-template>
 <br>
 <button mat-button (click)="onCancelClick()">Cancel</button>
-<button mat-button [mat-dialog-close]="data.employee" cdkFocusInitial>Confirm</button>
+<button mat-button (click)="checkFields()">Confirm</button>

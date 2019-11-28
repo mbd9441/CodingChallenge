@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import {catchError, map, reduce} from 'rxjs/operators';
 
-import {Employee} from '../employee';
+import {Employee, create} from '../employee';
 import {EmployeeService} from '../employee.service';
 import { MatDialog } from '@angular/material';
-import {EmployeeModalComponent} from '../employee-details-modal/employee-details-modal.component'
-
+import {EmployeeDetailsModalComponent} from '../employee-details-modal/employee-details-modal.component'
+import {EmployeeRemoveModalComponent} from '../employee-remove-modal/employee-remove-modal.component';
 
 @Component({
   selector: 'app-employee-list',
@@ -13,13 +13,18 @@ import {EmployeeModalComponent} from '../employee-details-modal/employee-details
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
-  private employees: Employee[] = [];
+  employees: Employee[];
   errorMessage: string;
-  editEmployee: Employee[];
-  constructor(private employeeService: EmployeeService, public EmployeeModal:MatDialog) {
+  editEmployee: Employee;
+  removeEmployee: Employee[];
+  constructor(private employeeService: EmployeeService, public EmployeeDetailsModal:MatDialog, public EmployeeRemoveModal:MatDialog, private changeDetectorRefs: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
+    this.loadEmployees();
+  }
+
+  loadEmployees(): void {
     this.employeeService.getAll()
       .pipe(
         reduce((emps, e: Employee) => emps.concat(e), []),
@@ -28,34 +33,95 @@ export class EmployeeListComponent implements OnInit {
       ).subscribe();
   }
 
-  performEdit(editEmp: Employee){
-    console.log("edit: " + editEmp.id);
-    this.openDialog([editEmp]);
-  }
-
-  performDelete(deleteEmp: Employee[]){
-    console.log("delete " + deleteEmp[0].id + " from " + deleteEmp[1].id);
-    if(!!deleteEmp[1].id){
+  performRemove(removeEmp: Employee[]){
+    console.log("Remove " + removeEmp[0].id + " from " + removeEmp[1]);
+    if(!!removeEmp[1]){
       console.log("sorta bye bye")
     } else {
       console.log("uh oh! bye bye");
     }
-    this.openDialog(deleteEmp);
+    this.openRemoveDialog(removeEmp);
   }
 
-  openDialog(employee: Employee[]): void {
-    const employeeModal = this.EmployeeModal.open(EmployeeModalComponent, {
+  openRemoveDialog(employee: Employee[]): void {
+    const EmployeeRemoveModal = this.EmployeeRemoveModal.open(EmployeeRemoveModalComponent, {
+      width: '250px',
+      data: { reload: (  ) => this.loadEmployees(), employee }
+    });
+
+    EmployeeRemoveModal.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.removeEmployee = result;
+      console.log(result);
+      if (!!result){
+        console.log("erhswdhstdh" + result);
+        if (!!result[1]){
+          console.log("fuck")
+        } else {
+          console.log("shit" + this.removeEmployee[0])
+          this.removeReportsAll(this.removeEmployee[0]);
+          this.employeeService.remove(this.removeEmployee[0]).subscribe(
+            result=>{
+              this.loadEmployees();
+            }
+          );
+          console.log(this.employees);
+        }
+      }
+    });
+  }
+
+  removeReportsAll(emp:Employee){
+    //var emps:number = 0;
+    for(var i=0; i<this.employees.length; i++){
+        console.log(this.employees[i])
+        if (!!this.employees[i].directReports){
+          for(var j=0; j<this.employees[i].directReports.length; j++){
+            console.log(this.employees[i].directReports[j]);
+            if(this.employees[i].directReports[j]==emp.id){
+              this.employees[i].directReports.splice(j,1);
+              this.employeeService.save(this.employees[i]).subscribe(
+                result=>{}
+              )
+            }
+          }
+        }
+    }
+  }
+
+  performEdit(editEmp: Employee){
+    console.log("edit: " + editEmp.id);
+    this.openEditDialog(editEmp);
+  }
+
+  openEditDialog(employee: Employee): void {
+    const EmployeeDetailsModal = this.EmployeeDetailsModal.open(EmployeeDetailsModalComponent, {
       width: '250px',
       data: employee
     });
 
-    employeeModal.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    EmployeeDetailsModal.afterClosed().subscribe(result => {
       this.editEmployee = result;
+      console.log(result);
       if (!!result){
-        console.log(result);
+        console.log("poop" + employee + this.editEmployee);
+        if (employee !== this.editEmployee){
+          console.log("Edited");
+        }
       }
     });
+  }
+
+  performAdd(addEmp: Employee[]){
+    var newEmp: Employee = create();
+    if (!!addEmp){
+      if (addEmp[1]){
+        console.log("add new employee to: " + addEmp[1].id);
+      }
+    }else{
+      console.log("add employee");
+    }
+    this.openEditDialog(newEmp);
   }
 
   private handleError(e: Error | any): string {

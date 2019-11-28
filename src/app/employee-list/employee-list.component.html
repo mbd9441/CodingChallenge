@@ -1,12 +1,12 @@
-<mat-list class="employee-list" cols="1" rowHeight="2:1">
-  <mat-list-item class = "employee" *ngFor="let emp of employees">
-    <app-employee [employee]="emp" (edit)="performEdit($event)" (delete)="performDelete($event)"></app-employee>
+<mat-list class="employee-list" cols="1" rowHeight="2:1" *ngIf="!!employees">
+  <mat-list-item class = "employee" *ngFor="let emp of employees async">
+    <app-employee [employee]="emp" (add)="performAdd($event)" (edit)="performEdit($event)" (remove)="performRemove($event)"></app-employee>
   </mat-list-item>
 </mat-list>
 
 <div class="pagewidth">
   <div class="footer">
-    <button mat-fab fxFlexOffset="35" id="add-client-fab" (click)="addEmployee()">
+    <button mat-fab fxFlexOffset="35" id="add-client-fab" (click)="performAdd()">
       <mat-icon>
         add
       </mat-icon>

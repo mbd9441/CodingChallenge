@@ -11,14 +11,16 @@ import {BackendlessMockService} from './backendless-mock.service';
 import {EmployeeComponent} from './employee/employee.component';
 import {EmployeeListComponent} from './employee-list/employee-list.component';
 import {EmployeeService} from './employee.service';
-import { EmployeeModalComponent } from './employee-details-modal/employee-details-modal.component';
+import { EmployeeDetailsModalComponent } from './employee-details-modal/employee-details-modal.component';
+import { EmployeeRemoveModalComponent } from './employee-remove-modal/employee-remove-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeComponent,
     EmployeeListComponent,
-    EmployeeModalComponent
+    EmployeeDetailsModalComponent,
+    EmployeeRemoveModalComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,7 @@ import { EmployeeModalComponent } from './employee-details-modal/employee-detail
     FormsModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(BackendlessMockService, {
-      apiBase: 'api/employee/',
+      apiBase: 'api/',
       delay: 250,
       passThruUnknownUrl: true,
       post204: false,
@@ -44,7 +46,7 @@ import { EmployeeModalComponent } from './employee-details-modal/employee-detail
     MatDialogModule
   ],
   providers: [EmployeeService],
-  entryComponents: [EmployeeModalComponent],
+  entryComponents: [EmployeeDetailsModalComponent, EmployeeRemoveModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

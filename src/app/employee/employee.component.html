@@ -9,7 +9,7 @@
           edit
         </mat-icon>
       </button>
-      <button (click)="deleteClick($event, employee, {})" mat-icon-button>
+      <button (click)="removeClick($event, employee, undefined)" mat-icon-button>
         <mat-icon>
           delete
         </mat-icon>
@@ -37,12 +37,12 @@
             <div class="reportcol">
                 <b>{{rep.id}} &nbsp;&nbsp;&nbsp;{{rep.firstName}} {{rep.lastName}} </b>
             </div>
-            <button   (click)="editClick($event, rep)" mat-mini-fab class="editRep">
+            <button (click)="editClick($event, rep)" mat-mini-fab class="editRep">
               <mat-icon>
                 edit
               </mat-icon>
             </button>
-            <button (click)="deleteClick($event, rep, employee)" mat-mini-fab class="deleteRep">
+            <button (click)="removeClick($event, rep, employee)" mat-mini-fab class="deleteRep">
               <mat-icon>
                 delete
               </mat-icon>
@@ -56,7 +56,7 @@
         </mat-list-item>
       </mat-list>
       <div class="reportfooter">
-        <button (click)="addClick($event, employee);$event.stopPropagation();" mat-flat-button>
+        <button (click)="addClick($event, rep, employee);" mat-flat-button>
           Add Report
         </button>
       </div>

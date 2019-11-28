@@ -7,7 +7,7 @@ import {Employee} from './employee';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeService {
-  private url = '/api/employee/';
+  private url = 'api/';
   constructor(private http: HttpClient) {
   }
 
@@ -25,13 +25,14 @@ export class EmployeeService {
   }
 
   save(emp: Employee): Observable<Employee> {
+    console.log("saving emp: "+emp.id);
     const response = (!!emp.id) ? this.put(emp) : this.post(emp);
     return response.pipe(catchError(this.handleError));
   }
 
-  remove(emp: Employee): Observable<never> {
-    return this.http
-      .delete<never>(`${this.url}/${emp.id}`)
+  remove(emp: Employee): Observable<Employee> {
+    console.log("delete " + emp.id)
+    return this.http.delete<Employee>(`${this.url}employees/${emp.id}`)
       .pipe(catchError(this.handleError));
   }
 
@@ -40,7 +41,7 @@ export class EmployeeService {
   }
 
   private put(emp: Employee): Observable<Employee> {
-    return this.http.put<Employee>(`${this.url}/${emp.id}`, emp);
+    return this.http.put<Employee>(`${this.url}employees/${emp.id}`, emp);
   }
 
   private handleError(res: HttpErrorResponse | any): Observable<never> {

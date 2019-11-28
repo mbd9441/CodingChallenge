@@ -13,17 +13,14 @@ import {EmployeeService} from '../employee.service';
 export class EmployeeComponent {
   @Input() employee: Employee;
   @Output() edit = new EventEmitter<Employee>();
-  @Output() delete = new EventEmitter<Employee[]>();
-  @Output() add = new EventEmitter<Employee>();
+  @Output() remove = new EventEmitter<Employee[]>();
+  @Output() add = new EventEmitter<Employee[]>();
   errorMessage: string;
-  private Compensation: number;
+  private Compensation: number = 0;
   private reports: Employee[]=[];
-  constructor(private employeeService: EmployeeService) {
-    
-  }
+  constructor(private employeeService: EmployeeService) { }
 
   ngOnInit(): void {
-    this.employee["numDirectReports"]=0;
     this.getReports(this.employee.id);
   }
 
@@ -38,10 +35,11 @@ export class EmployeeComponent {
           var curemp=emps[emp];
           if (curemp.id == curempid){
             if (!!curemp.directReports){
-              console.log(curemp.id);
+              //console.log(curemp.id);
               this.employee["numDirectReports"] = emps[emp].directReports.length;
               this.recurEmps(emps, curempid);
-              break
+            } else {
+              this.employee["numDirectReports"] = 0;
             }
           }
         }
@@ -55,14 +53,36 @@ export class EmployeeComponent {
     var curemp = emps[curempid-1];
     if (!!curemp.directReports){
       for (var rprts in curemp.directReports){
-        console.log('current ' + curemp.id + ' reports ' + curemp.directReports[rprts]);
-        this.reports.push(emps[curemp.directReports[rprts]-1]);
-        if (emps[curemp.directReports[rprts]-1].directReports){
-          this.recurEmps(emps,emps[curemp.directReports[rprts]-1].id);
+        for (var emp in emps){
+          if (emps[emp].id==curemp.directReports[rprts]){
+            this.reports.push(emps[emp]);
+            if (!!emps[emp].directReports){
+              this.recurEmps(emps, emps[emp].id)
+            }
+            break
+          }
         }
       }
     }
   }
+
+  addClick(event:Event, thisEmp: Employee, parentEmp:Employee){
+    this.add.emit([thisEmp, parentEmp]);
+  }
+
+  editClick(event:Event, thisEmp: Employee){
+    this.edit.emit(thisEmp);
+  }
+
+  removeClick(event:Event, thisEmp: Employee, parentEmp:Employee){
+    this.remove.emit([thisEmp,parentEmp]);
+  }
+
+  private handleError(e: Error | any): string {
+    console.error(e);
+    return this.errorMessage = e.message || 'Unable to retrieve employees';
+  }
+}
 
   /**async getAllReports(curempid: number, origempid: number, reports: Employee[], priorIter: number[]): Promise<[Employee[], number[]]>{
     var currentEmployee: Employee;
@@ -92,21 +112,3 @@ export class EmployeeComponent {
     );
     return Promise.resolve([reports, priorIter]);
   }**/
-
-  editClick(event:Event, emp: Employee){
-    this.edit.emit(emp);
-  }
-
-  deleteClick(event:Event, thisEmp: Employee, fromEmp:Employee){
-    this.delete.emit([thisEmp,fromEmp]);
-  }
-
-  addClick(event:Event, parentEmp: Employee){
-    this.add.emit(parentEmp);
-  }
-
-  private handleError(e: Error | any): string {
-    console.error(e);
-    return this.errorMessage = e.message || 'Unable to retrieve employees';
-  }
-}
