@@ -115,7 +115,6 @@ export class EmployeeListComponent implements OnInit {
   }
 
   performAddReport(parentEmp: Employee){
-    console.log(parentEmp)
     this.openAddReportDialog(parentEmp);
   }
 

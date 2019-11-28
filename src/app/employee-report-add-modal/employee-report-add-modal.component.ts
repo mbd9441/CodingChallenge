@@ -18,24 +18,30 @@ export class EmployeeReportAddModalComponent implements OnInit {
       if (data){
         this.employee = data[0];
         this.potentialEmps = data[1].slice();
+        //remove this employee from potential reports
+        //and all people who this person reports to
         for (var i = 0; i < this.potentialEmps.length; i++){
           if (this.potentialEmps[i].id==this.employee.id){
             this.potentialEmps.splice(i,1);
-            break
+          } else if (!!this.potentialEmps[i].directReports){
+            if (this.potentialEmps[i].directReports.includes(this.employee.id)){
+              this.potentialEmps.splice(i,1);
+              i--;
+            }
           }
         }
+        //remove current reports from potential reports
         if (!!this.employee.directReports){
-          for (var i = 0; i < this.employee.directReports.length; i++){
-            for (var j = 0; j < this.potentialEmps.length; j++){
-              if (this.potentialEmps[j].id==this.potentialEmps[i].id){
-                this.potentialEmps.splice(i,1);
+          for (var emp in this.employee.directReports){
+            for (var rep = 0; rep < this.potentialEmps.length; rep++){
+              if (this.potentialEmps[rep].id==this.employee.directReports[emp]){
+                this.potentialEmps.splice(rep,1);
+                rep=rep-1;
                 break
               }
             }
           }
         }
-        console.log(this.employee)
-        console.log(this.potentialEmps)
       }
     }
 

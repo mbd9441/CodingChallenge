@@ -1,11 +1,21 @@
-<mat-form-field>
-  <mat-label>Select new report</mat-label>
-  <mat-select [(ngModel)]="selectedEmployee" name="sEmployee">
-    <mat-option *ngFor="let emps of potentialEmps" 
-    [value]="emps">
-    {{emps.firstName}} {{emps.lastName}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<button mat-button (click)="onCancelClick()" cdkFocusInitial>Cancel</button>
-<button mat-button (click)="onConfirmClick()" >Confirm</button>
+<div *ngIf="potentialEmps.length>0; else noPotentialEmps">
+  <mat-form-field >
+    <mat-label>Select new report</mat-label>
+    <mat-select cdkFocusInitial [(ngModel)]="selectedEmployee" name="sEmployee">
+      <mat-option *ngFor="let emps of potentialEmps" 
+      [value]="emps">
+      {{emps.firstName}} {{emps.lastName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-button (click)="onCancelClick()" >Cancel</button>
+  <button mat-button (click)="onConfirmClick()" >Confirm</button>
+</div>
+<ng-template #noPotentialEmps>
+  <div>
+    <p>
+      No Employees Available to Add!
+    </p>
+    <button mat-button (click)="onCancelClick()" >Cancel</button>
+  </div>
+</ng-template>

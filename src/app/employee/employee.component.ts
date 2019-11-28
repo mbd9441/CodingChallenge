@@ -57,9 +57,11 @@ export class EmployeeComponent {
       for (var rprts in curemp.directReports){
         for (var emp in this.employees){
           if (this.employees[emp].id==curemp.directReports[rprts]){
-            this.reports.push(this.employees[emp]);
-            if (!!this.employees[emp].directReports){
-              this.recurEmps(this.employees[emp])
+            if(!this.reports.includes(this.employees[emp])){
+              this.reports.push(this.employees[emp]);
+              if (!!this.employees[emp].directReports){
+                this.recurEmps(this.employees[emp])
+              }
             }
             break
           }
