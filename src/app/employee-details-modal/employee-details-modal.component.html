@@ -40,12 +40,12 @@
           <input matInput placeholder="Position" [(ngModel)]="employee.position" name="position" required>
       </mat-form-field>
     </ng-template>
-    <mat-form-field *ngIf="!!employee.id && !employee.compensation; else noCompensation">
-        <input matInput placeholder="Compensation" [(ngModel)]="employee.compensation" name="compensation" cdkFocusInitial required>
+    <mat-form-field *ngIf="!!employee.id; else noCompensation">
+        <input type="text" pattern="[0-9]*" matInput placeholder="Compensation" [(ngModel)]="employee.compensation" name="compensation" cdkFocusInitial required>
     </mat-form-field>
     <ng-template #noCompensation>
       <mat-form-field>
-          <input matInput placeholder="Compensation" [(ngModel)]="employee.compensation" name="compensation" required>
+          <input type="text" pattern="[0-9]*" matInput placeholder="Compensation" [(ngModel)]="employee.compensation" name="compensation" required>
       </mat-form-field>
     </ng-template>
   </form>

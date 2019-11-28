@@ -16,7 +16,7 @@ export class EmployeeComponent {
   @Output() remove = new EventEmitter<Employee[]>();
   @Output() add = new EventEmitter<Employee[]>();
   errorMessage: string;
-  private Compensation: number = 0;
+  private employees: any = [];
   private reports: Employee[]=[];
   constructor(private employeeService: EmployeeService) { }
 
@@ -31,33 +31,31 @@ export class EmployeeComponent {
       catchError(this.handleError.bind(this))
     ).subscribe(
       (emps)=>{
+        this.employees=emps;
         for (var emp in emps){
           var curemp=emps[emp];
           if (curemp.id == curempid){
             if (!!curemp.directReports){
-              //console.log(curemp.id);
               this.employee["numDirectReports"] = emps[emp].directReports.length;
-              this.recurEmps(emps, curempid);
+              this.recurEmps(curemp);
             } else {
               this.employee["numDirectReports"] = 0;
             }
           }
-        }
-        console.log(this.reports);        
+        }     
         this.employee["totalReports"]=this.reports.length;
       }
     );
   }
 
-  recurEmps(emps: any, curempid: number) {
-    var curemp = emps[curempid-1];
+  recurEmps(curemp: Employee) {
     if (!!curemp.directReports){
       for (var rprts in curemp.directReports){
-        for (var emp in emps){
-          if (emps[emp].id==curemp.directReports[rprts]){
-            this.reports.push(emps[emp]);
-            if (!!emps[emp].directReports){
-              this.recurEmps(emps, emps[emp].id)
+        for (var emp in this.employees){
+          if (this.employees[emp].id==curemp.directReports[rprts]){
+            this.reports.push(this.employees[emp]);
+            if (!!this.employees[emp].directReports){
+              this.recurEmps(this.employees[emp])
             }
             break
           }

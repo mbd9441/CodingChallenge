@@ -12,23 +12,23 @@ export class EmployeeRemoveModalComponent implements OnInit {
   private fromEmployee: Employee;
   
   ngOnInit(): void {
-    //this.employee=this.data.employee;
   }
 
   constructor(
     public dialogRef: MatDialogRef<EmployeeRemoveModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      if (!!data.employee){
-        this.employee=data.employee[0];
-        console.log("anus");
-        console.log(data);
-        if (data.employee[1]){
-          this.fromEmployee=data.employee[1];
-          console.log("Remove gdcgf" + this.employee.id + " from " + this.fromEmployee.id);
+      console.log(data)
+      if (!!data){
+        this.employee=data.employees[0];
+        if (!!data.employees[1]){
+          this.fromEmployee=data.employees[1];
         }
       }
     }
   
+  onConfirmClick(): void {
+    this.dialogRef.close([this.employee, this.fromEmployee]);
+  }
   onCancelClick(): void {
     this.dialogRef.close();
   }

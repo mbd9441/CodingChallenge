@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 /* You can add global styles to this file, and also import other style files */
 
-
 :root{
     --page-width-desktop: 50%;
     --off-white: #f2f2f2;
@@ -12,7 +11,6 @@
     --mindex-really-dark-blue: #00233f;
     --mindex-orange: #d1581c;
     --mindex-light-orange: #de9f46;
-
 }
 
 body{
@@ -57,7 +55,6 @@ mat-list.mat-list{
     background-color:red;
 }
 
-
 div.mat-list-item-content {
     padding: 0px !important;
 }
@@ -95,6 +92,8 @@ mat-expansion-panel.mat-expansion-panel{
 div.reportrow{
     width: 100%;
     display: flex;
+    padding-top:7px;
+    padding-bottom:7px;
 }
 
 div.reportcol{
@@ -143,4 +142,24 @@ button#add-client-fab.mat-fab.mat-accent {
     bottom: 10px !important;
     position: fixed !important;
     background-color: var(--mindex-dark-blue);
+}
+
+div.no-report-header{
+    border-top: 1px solid gainsboro;
+    display: block;
+    box-sizing: content-box;
+    margin: 0;
+}
+
+div.no-report-header-body{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 48px;
+    font-size: 15px;
+    padding: 0px 24px 0px 24px;
+}
+
+p.no-report-header-text{
+    flex-grow: 1;
 }

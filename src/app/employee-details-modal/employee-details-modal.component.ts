@@ -32,11 +32,19 @@ export class EmployeeDetailsModalComponent implements OnInit {
       console.log(this.employee[field]);
       if (!this.employee[field]){
         canClose=false;
-        console.log(canClose);
+      } else if (this.employee.compensation){
+        var compstring: string = this.employee.compensation.toString();
+        if (!compstring.match(/^[0-9]+$/)){
+          
+          canClose=false;
+        } else {
+          this.employee.compensation = Number(this.employee.compensation);
+        }
       }
     }
     if (canClose) {
-      this.dialogRef.close();
+      this.employee.compensation=this.employee.compensation
+      this.dialogRef.close(this.employee);
     }
   }
 

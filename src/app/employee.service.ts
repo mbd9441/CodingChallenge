@@ -25,13 +25,12 @@ export class EmployeeService {
   }
 
   save(emp: Employee): Observable<Employee> {
-    console.log("saving emp: "+emp.id);
+    console.log(emp)
     const response = (!!emp.id) ? this.put(emp) : this.post(emp);
     return response.pipe(catchError(this.handleError));
   }
 
   remove(emp: Employee): Observable<Employee> {
-    console.log("delete " + emp.id)
     return this.http.delete<Employee>(`${this.url}employees/${emp.id}`)
       .pipe(catchError(this.handleError));
   }
