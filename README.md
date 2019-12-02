@@ -1,5 +1,15 @@
 # Mindex Angular 6 Coding Challenge
 
+#Installation Instructions:
+1. Download the project or pull it down via git
+2. Go to https://nodejs.org/en/download/ and install the latest version and install it
+3. Make sure C:\Program Files\nodejs\ is included your PATH under environment variables
+4. Open command line and navigate to the root directory of the project
+5. run "npm install"
+6. From here, if you try to use "npm start," it probably won-t work and have errors in rxjs - I'm not positive as to why this is, but if you run "npm install rxjs@6.0.0" and try it again, it will work
+
+
+
 ## What's Provided
 An [Angular 6](https://angular.io/) employee web application has been created and bootstrapped using an in browser "database".
 Basic unit and e2e tests have been created.  [Angular Material Design](https://material.angular.io/) and [Flex Layout](https://github.com/angular/flex-layout)

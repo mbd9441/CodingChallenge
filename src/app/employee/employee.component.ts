@@ -61,9 +61,18 @@ export class EmployeeComponent {
       for (var rprts in curemp.directReports){
         for (var emp in this.employees){
           if (this.employees[emp].id==curemp.directReports[rprts]){
-            if(!this.reports.includes(this.employees[emp])){
-              this.reports.push(this.employees[emp]);
+            if(!this.reports.includes(this.employees[emp]) && this.employees[emp].id!=this.employee.id){
+              if (curemp.id == this.employee.id){
+                if (this.employee.directReports.includes(this.employees[emp].id)){
+                  this.reports.push(this.employees[emp]);
+                }
+              } else {
+                if (!this.employee.directReports.includes(this.employees[emp].id)){
+                  this.reports.push(this.employees[emp]);
+                }
+              }
               if (!!this.employees[emp].directReports){
+                console.log("hasreports")
                 this.recurEmps(this.employees[emp])
               }
             }

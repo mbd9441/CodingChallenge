@@ -21,19 +21,19 @@ body{
 
 div.header{
     background-color: var(--mindex-blue);
+    overflow: hidden;
 }
 
 div.bannerwidth{
+    display: flex;
     font-size: 2em;
     font-weight: 500;
     color: white;
     width: var(--page-width-desktop);
     margin: auto;
     overflow: hidden;
-    white-space: nowrap ;
     padding: 25px;
-    flex-flow: column nowrap;
-    justify-content: space-around;
+    flex-flow: row nowrap;
 }
 
 mat-list.employee-list.mat-list{
