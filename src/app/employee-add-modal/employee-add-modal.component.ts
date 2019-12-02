@@ -4,8 +4,7 @@ import { Employee } from '../employee';
 
 @Component({
   selector: 'app-employee-add-modal',
-  templateUrl: './employee-add-modal.component.html',
-  styleUrls: ['./employee-add-modal.component.css']
+  templateUrl: './employee-add-modal.component.html'
 })
 export class EmployeeAddModalComponent implements OnInit {
   private employee: Employee;

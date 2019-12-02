@@ -1,12 +1,7 @@
 <div>
-  <h3 *ngIf="!!employee.id; else add">
-    Edit
+  <h3>
+    Add New Employee
   </h3>
-  <ng-template #add>
-    <h3>
-      Add
-    </h3>
-  </ng-template>
   <form class="editEmployee">
     <mat-form-field>
       <input matInput placeholder="ID" [(ngModel)]="employee.id" name="id" readonly=true disabled>
@@ -26,5 +21,7 @@
   </form>
 </div>
 <br>
-<button mat-button (click)="onCancelClick()">Cancel</button>
-<button mat-button (click)="checkFields()">Confirm</button>
+<div class="modalFooter">
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-flat-button (click)="checkFields()">Confirm</button>
+</div>

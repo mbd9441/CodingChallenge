@@ -4,8 +4,7 @@ import { Employee } from '../employee';
 
 @Component({
   selector: 'app-employee-remove-modal',
-  templateUrl: './employee-remove-modal.component.html',
-  styleUrls: ['./employee-remove-modal.component.css']
+  templateUrl: './employee-remove-modal.component.html'
 })
 export class EmployeeRemoveModalComponent implements OnInit {
   private employee: Employee;

@@ -1,6 +1,9 @@
 <div *ngIf="potentialEmps.length>0; else noPotentialEmps">
+  <h3>
+    Add New Report
+  </h3>
   <mat-form-field >
-    <mat-label>Select new report</mat-label>
+    <mat-label>Select Employee</mat-label>
     <mat-select cdkFocusInitial [(ngModel)]="selectedEmployee" name="sEmployee">
       <mat-option *ngFor="let emps of potentialEmps" 
       [value]="emps">
@@ -8,14 +11,18 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <button mat-button (click)="onCancelClick()" >Cancel</button>
-  <button mat-button (click)="onConfirmClick()" >Confirm</button>
+  <div class="modalFooter">
+    <button mat-button (click)="onCancelClick()" >Cancel</button>
+    <button mat-flat-button (click)="onConfirmClick()" >Confirm</button>
+  </div>
 </div>
 <ng-template #noPotentialEmps>
   <div>
     <p>
       No Employees Available to Add!
     </p>
-    <button mat-button (click)="onCancelClick()" >Cancel</button>
+    <div class="modalFooter">
+      <button mat-button (click)="onCancelClick()" >Cancel</button>
+    </div>
   </div>
 </ng-template>

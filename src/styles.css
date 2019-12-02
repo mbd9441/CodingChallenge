@@ -1,5 +1,6 @@
+/* I figured having a global style sheet would be better than duplicating css cross-class */
+/* Because of this, I removed the individual component's css files. */
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-/* You can add global styles to this file, and also import other style files */
 
 :root{
     --page-width-desktop: 50%;
@@ -21,7 +22,11 @@ body{
 
 div.header{
     background-color: var(--mindex-blue);
-    overflow: hidden;
+    background-image: url('assets/swoop.svg');
+    background-repeat: no-repeat;
+    background-position: right top;
+    white-space: nowrap;
+    background-size: cover;
 }
 
 div.bannerwidth{
@@ -31,15 +36,15 @@ div.bannerwidth{
     color: white;
     width: var(--page-width-desktop);
     margin: auto;
-    overflow: hidden;
     padding: 25px;
-    flex-flow: row nowrap;
+    flex-flow: row-reverse nowrap;
 }
 
 mat-list.employee-list.mat-list{
     width: var(--page-width-desktop);
     margin: auto;
     padding-top: 0px !important;
+    overflow: hidden;
 }
 
 mat-list.mat-list{
@@ -63,7 +68,6 @@ app-employee{
     border-radius: 2px;
     background-color: white;
     box-shadow: 0px 4px 4px lightgray;
-    
 }
 
 h3.mat-line{
@@ -98,14 +102,14 @@ div.reportcol{
 }
 
 button.editRep.mat-mini-fab.mat-accent{
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 6px;
+    margin-right: 6px;
     background-color: var(--mindex-blue);
 }
 
 button.deleteRep.mat-mini-fab.mat-accent{
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 6px;
+    margin-right: 6px;
     background-color: var(--mindex-blue);
 }
 
@@ -115,7 +119,7 @@ div.reportfooter {
     padding-top: 15px;
 }
 
-button.mat-flat-button.mat-primary{
+button.addReportButton.mat-flat-button.mat-primary{
     background-color: var(--mindex-dark-blue);
 }
 
@@ -158,4 +162,18 @@ div.no-report-header-body{
 
 p.no-report-header-text{
     flex-grow: 1;
+}
+
+div.modalFooter {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+button.mat-flat-button.mat-primary {
+    background-color: var(--mindex-orange);
 }

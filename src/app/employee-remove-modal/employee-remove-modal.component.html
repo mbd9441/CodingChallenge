@@ -5,6 +5,9 @@
   <div *ngIf="!fromEmployee; else Completely">
     <p >
         Are you sure you want to completely remove <b>{{employee.firstName}} {{employee.lastName}}</b>?
+        <br>
+        <br>
+        This is permanent and <b>CANNOT</b> be undone.
     </p>
   </div>
   <ng-template #Completely>
@@ -16,5 +19,7 @@
   </ng-template>
 </div>
 <br>
-<button mat-button (click)="onCancelClick()" cdkFocusInitial>Cancel</button>
-<button mat-button (click)="onConfirmClick()" >Confirm</button>
+<div class="modalFooter">
+  <button mat-button (click)="onCancelClick()" cdkFocusInitial>Cancel</button>
+  <button mat-flat-button (click)="onConfirmClick()" >Confirm</button>
+</div>
