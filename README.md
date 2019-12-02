@@ -8,7 +8,9 @@
 5. run "npm install"
 6. From here, if you try to use "npm start," it probably won-t work and have errors in rxjs - I'm not positive as to why this is, but if you run "npm install rxjs@6.0.0" and try it again, it will work
 
-
+#Running Instructions;
+1. Nagivate to the directory containing the project
+2. Run "npm start"
 
 ## What's Provided
 An [Angular 6](https://angular.io/) employee web application has been created and bootstrapped using an in browser "database".

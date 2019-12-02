@@ -71,7 +71,6 @@ export class EmployeeComponent {
                 }
               }
               if (!!this.employees[emp].directReports){
-                console.log("hasreports")
                 this.recurEmps(this.employees[emp])
               }
             }

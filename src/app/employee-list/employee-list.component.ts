@@ -128,7 +128,7 @@ export class EmployeeListComponent implements OnInit {
 
     EmployeeReportAddModal.afterClosed().subscribe(result => {
       if (!!result){
-        console.log(result)
+        result.directReports=result.directReports.sort();
         this.employeeService.save(result).subscribe(
           result=>{
             this.loadEmployees();
@@ -157,7 +157,6 @@ export class EmployeeListComponent implements OnInit {
 
     EmployeeAddModal.afterClosed().subscribe(result => {
       if (!!result){
-        console.log(result)
         this.employeeService.save(result).subscribe(
           result=>{
             this.loadEmployees();

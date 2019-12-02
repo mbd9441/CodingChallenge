@@ -31,7 +31,6 @@ export class EmployeeDetailsModalComponent implements OnInit {
         canClose=false;
       } else if (this.employee.compensation){
         var compstring: string = this.employee.compensation.toString();
-        console.log("poop" + compstring);
         if (compstring.match(/^[0-9]+$/)){
           this.employee.compensation = Number(this.employee.compensation);
         } else {
