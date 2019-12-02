@@ -46,10 +46,6 @@ mat-list.mat-list{
     padding-top: 0px !important;
 }
 
-.mat-list > mat-list.replist.mat-list:nth-child(2n){
-    background-color:red;
-}
-
 div.mat-list-item-content {
     padding: 0px !important;
 }
@@ -104,13 +100,13 @@ div.reportcol{
 button.editRep.mat-mini-fab.mat-accent{
     margin-left: 5px;
     margin-right: 5px;
-    background-color: var(--mindex-light-orange);
+    background-color: var(--mindex-blue);
 }
 
 button.deleteRep.mat-mini-fab.mat-accent{
     margin-left: 5px;
     margin-right: 5px;
-    background-color: var(--mindex-light-orange);
+    background-color: var(--mindex-blue);
 }
 
 div.reportfooter {
@@ -120,7 +116,7 @@ div.reportfooter {
 }
 
 button.mat-flat-button.mat-primary{
-    background-color: var(--mindex-orange);
+    background-color: var(--mindex-dark-blue);
 }
 
 div.pagewidth {
@@ -141,7 +137,7 @@ button#add-client-fab.mat-fab.mat-accent {
     top: auto !important;
     bottom: 10px !important;
     position: fixed !important;
-    background-color: var(--mindex-dark-blue);
+    background-color: var(--mindex-orange);
 }
 
 div.no-report-header{

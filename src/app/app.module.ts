@@ -14,6 +14,7 @@ import {EmployeeService} from './employee.service';
 import { EmployeeDetailsModalComponent } from './employee-details-modal/employee-details-modal.component';
 import { EmployeeRemoveModalComponent } from './employee-remove-modal/employee-remove-modal.component';
 import { EmployeeReportAddModalComponent } from './employee-report-add-modal/employee-report-add-modal.component';
+import { EmployeeAddModalComponent } from './employee-add-modal/employee-add-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { EmployeeReportAddModalComponent } from './employee-report-add-modal/emp
     EmployeeListComponent,
     EmployeeDetailsModalComponent,
     EmployeeRemoveModalComponent,
-    EmployeeReportAddModalComponent
+    EmployeeReportAddModalComponent,
+    EmployeeAddModalComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ import { EmployeeReportAddModalComponent } from './employee-report-add-modal/emp
     MatSelectModule
   ],
   providers: [EmployeeService],
-  entryComponents: [EmployeeDetailsModalComponent, EmployeeRemoveModalComponent, EmployeeReportAddModalComponent],
+  entryComponents: [EmployeeDetailsModalComponent, EmployeeRemoveModalComponent, EmployeeReportAddModalComponent, EmployeeAddModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

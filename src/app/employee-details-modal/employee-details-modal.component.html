@@ -13,15 +13,15 @@
     </mat-form-field>
     <ng-template #noId>
       <mat-form-field>
-        <input matInput placeholder="ID" [(ngModel)]="employee.id" name="id" cdkFocusInitial required>
+        <input matInput placeholder="ID" [(ngModel)]="employee.id" name="id" required>
       </mat-form-field>
     </ng-template>
     <mat-form-field *ngIf="!!employee.firstName; else noFirstName">
-      <input matInput placeholder="First Name" [(ngModel)]="employee.firstName" name="firstName" readonly=true disabled>
+      <input matInput placeholder="First Name" [(ngModel)]="employee.firstName" name="firstName" readonly=true  disabled>
     </mat-form-field>
     <ng-template #noFirstName>
       <mat-form-field>
-        <input matInput placeholder="First Name" [(ngModel)]="employee.firstName" name="firstName" required>
+        <input matInput placeholder="First Name" [(ngModel)]="employee.firstName" name="firstName" cdkFocusInitial required>
       </mat-form-field>
     </ng-template>
     <mat-form-field *ngIf="!!employee.lastName; else noLastName">

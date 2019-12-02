@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {catchError, map, reduce} from 'rxjs/operators';
 
-import {Employee, create} from '../employee';
+import {Employee} from '../employee';
 import {EmployeeService} from '../employee.service';
 import { MatDialog } from '@angular/material';
 import {EmployeeDetailsModalComponent} from '../employee-details-modal/employee-details-modal.component';
 import {EmployeeRemoveModalComponent} from '../employee-remove-modal/employee-remove-modal.component';
 import {EmployeeReportAddModalComponent} from '../employee-report-add-modal/employee-report-add-modal.component';
+import {EmployeeAddModalComponent} from '../employee-add-modal/employee-add-modal.component';
 
 @Component({
   selector: 'app-employee-list',
@@ -19,7 +20,8 @@ export class EmployeeListComponent implements OnInit {
   editEmployee: Employee;
   removeEmployee: Employee[];
   constructor(private employeeService: EmployeeService, public EmployeeDetailsModal:MatDialog, 
-    public EmployeeRemoveModal:MatDialog, public EmployeeReportAddModal: MatDialog) {
+    public EmployeeRemoveModal:MatDialog, public EmployeeReportAddModal: MatDialog,
+    public EmployeeAddModal:MatDialog) {
   }
 
   ngOnInit(): void {
@@ -136,6 +138,37 @@ export class EmployeeListComponent implements OnInit {
       }
     });
   }
+
+  performAddEmployee(){
+    this.openAddEmployeeDialog();
+  }
+
+  openAddEmployeeDialog(): void {
+    var emp = new Employee();
+    var empid: number = 1;
+    for (var emps in this.employees){
+      if (empid<=this.employees[emps].id){
+        emp.id=this.employees[emps].id + 1;
+      }
+    }
+    const EmployeeAddModal = this.EmployeeAddModal.open(EmployeeAddModalComponent, {
+      width: '250px',
+      data: emp
+    });
+
+    EmployeeAddModal.afterClosed().subscribe(result => {
+      if (!!result){
+        console.log(result)
+        this.employeeService.save(result).subscribe(
+          result=>{
+            this.loadEmployees();
+          }
+        )
+      }
+    });
+  }
+
+
 
   private handleError(e: Error | any): string {
     console.error(e);

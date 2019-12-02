@@ -32,21 +32,23 @@ export class EmployeeDetailsModalComponent implements OnInit {
         canClose=false;
       } else if (this.employee.compensation){
         var compstring: string = this.employee.compensation.toString();
-        if (!compstring.match(/^[0-9]+$/)){
-          
-          canClose=false;
-        } else {
+        console.log("poop" + compstring);
+        if (compstring.match(/^[0-9]+$/)){
           this.employee.compensation = Number(this.employee.compensation);
-        }
+        } else {
+          canClose=false;
+        } 
       }
     }
     if (canClose) {
-      this.employee.compensation=this.employee.compensation
       this.dialogRef.close(this.employee);
     }
   }
 
   onCancelClick(): void {
+    if (!this.employee.compensation){
+      this.employee.compensation = 0;
+    }
     this.dialogRef.close();
   }
 

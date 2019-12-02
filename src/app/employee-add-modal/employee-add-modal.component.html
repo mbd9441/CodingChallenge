@@ -1,0 +1,30 @@
+<div>
+  <h3 *ngIf="!!employee.id; else add">
+    Edit
+  </h3>
+  <ng-template #add>
+    <h3>
+      Add
+    </h3>
+  </ng-template>
+  <form class="editEmployee">
+    <mat-form-field>
+      <input matInput placeholder="ID" [(ngModel)]="employee.id" name="id" readonly=true disabled>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="First Name" [(ngModel)]="employee.firstName" name="firstName" cdkFocusInitial required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Last Name" [(ngModel)]="employee.lastName" name="lastName" required>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Position" [(ngModel)]="employee.position" name="position" required>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Compensation" [(ngModel)]="employee.compensation" name="compensation" required>
+    </mat-form-field>
+  </form>
+</div>
+<br>
+<button mat-button (click)="onCancelClick()">Cancel</button>
+<button mat-button (click)="checkFields()">Confirm</button>

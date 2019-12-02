@@ -18,6 +18,7 @@ export class EmployeeComponent {
   errorMessage: string;
   private employees: any = [];
   private reports: Employee[]=[];
+  private compensation: number;
   constructor(private employeeService: EmployeeService) { }
 
   ngOnInit(): void {
@@ -46,7 +47,10 @@ export class EmployeeComponent {
               this.employee["numDirectReports"] = 0;
             }
           }
-        }     
+        }
+        if (!this.employee.compensation){
+          this.employee.compensation=0;
+        }
         this.employee["totalReports"]=this.reports.length;
       }
     );
