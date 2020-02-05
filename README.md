@@ -1,4 +1,4 @@
-# Mindex Angular 6 Coding Challenge
+# Angular 6 Coding Challenge
 
 #Installation Instructions:
 1. Download the project or pull it down via git
