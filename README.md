@@ -25,8 +25,8 @@ have been added as dependencies.  Feel free to add or use other dependencies as 
 - A complete solution should be the goal, but an **incomplete solution is acceptable**. Code what you know how to code well. 
 - It is highly recommended that you write unit tests and/or e2e tests to thoroughly verify existing and any **added** functionality.
 - The challenge can be sufficiently completed without the use of the **Angular RxJS Library**, but it is recommended. 
-- If you are a Sr. level Candidate, the correct use of the **Angular RxJS Library** library is **REQUIRED** & it is expected that it's use, where appropriate is part & parcel of your solution. If this requirement is unclear to you, please ask your Mindex Talent Acquisition Adviser  for clarification.
-- Ask questions if something isn't clear. The Talent Acquisition Adviser you are working with knows how to reach a Sr. Mindex developer to resolve any questions you may have.
+- If you are a Sr. level Candidate, the correct use of the **Angular RxJS Library** library is **REQUIRED** & it is expected that it's use, where appropriate is part & parcel of your solution. If this requirement is unclear to you, please ask your Talent Acquisition Adviser  for clarification.
+- Ask questions if something isn't clear. The Talent Acquisition Adviser you are working with knows how to reach a Sr. developer to resolve any questions you may have.
 
 ### Initial setup
 
